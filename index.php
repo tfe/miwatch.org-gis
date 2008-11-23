@@ -7,13 +7,16 @@
     <meta name="title" content="MISM GIS Project - MIWatch.org" />
     <meta name="author" content="MISM GIS Project Team: Todd Eichel, Ryan Keane, Zhizhou Liu, Kevin Purtell" />
     
+    <?php if ($_SERVER['SERVER_NAME'] == 'localhost'): ?>
     <!-- Google Maps JS, with localhost API key -->
     <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAKt8DF9unss4amjuxq0LAChT2yXp_ZAY8_ufC3CFXhHIE1NvwkxRhR4J4-LIRRFwnvUdI7sxRM958_A"
           type="text/javascript"></script>
-    
+    <?php else: ?>
     <!-- Google Maps JS, with toddeichel.com API key -->
-    <!--<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAKt8DF9unss4amjuxq0LAChROd-J2Mwx5suvTDodChn7ion8O_xTpHTKoI5tqPFoASaIpFO9A-VTHxw"
-          type="text/javascript"></script> -->
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAKt8DF9unss4amjuxq0LAChROd-J2Mwx5suvTDodChn7ion8O_xTpHTKoI5tqPFoASaIpFO9A-VTHxw"
+          type="text/javascript"></script>
+    <?php endif; ?>
+    
     <script type="text/javascript">
 
       //<![CDATA[
