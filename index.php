@@ -1,3 +1,4 @@
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/php/init.php"); // do site init stuff ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
@@ -7,15 +8,7 @@
     <meta name="title" content="MISM GIS Project - MIWatch.org" />
     <meta name="author" content="MISM GIS Project Team: Todd Eichel, Ryan Keane, Zhizhou Liu, Kevin Purtell" />
     
-    <?php if ($_SERVER['SERVER_NAME'] == 'localhost'): ?>
-    <!-- Google Maps JS, with localhost API key -->
-    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAKt8DF9unss4amjuxq0LAChT2yXp_ZAY8_ufC3CFXhHIE1NvwkxRhR4J4-LIRRFwnvUdI7sxRM958_A"
-          type="text/javascript"></script>
-    <?php else: ?>
-    <!-- Google Maps JS, with toddeichel.com API key -->
-    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAKt8DF9unss4amjuxq0LAChROd-J2Mwx5suvTDodChn7ion8O_xTpHTKoI5tqPFoASaIpFO9A-VTHxw"
-          type="text/javascript"></script>
-    <?php endif; ?>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?php echo $api_key; ?>" type="text/javascript"></script>
     
     <script type="text/javascript">
 
@@ -24,8 +17,41 @@
       function load() {
         if (GBrowserIsCompatible()) {
           var map = new GMap2(document.getElementById("map"));
-          map.setCenter(new GLatLng(37.4419, -122.1419), 10);
+          
+          // set map center (required)
+          map.setCenter(new GLatLng(40.71256,-74.00505), 10);
+          
+          // add standard map controls
+          map.addControl(new GLargeMapControl());
+          map.addControl(new GMapTypeControl());
+          map.addControl(new GScaleControl());
+          map.addControl(new GOverviewMapControl());
+          
+          // pull data from php/mysql
+          GDownloadUrl("data.php", function(data) {
+            var xml = GXml.parse(data);
+            var markers = xml.documentElement.getElementsByTagName("marker");
+            for (var i = 0; i < markers.length; i++) {
+              var name = markers[i].getAttribute("name");
+              var address = markers[i].getAttribute("address");
+              var type = markers[i].getAttribute("type");
+              var point = new GLatLng(parseFloat(markers[i].getAttribute("lat")),
+                                      parseFloat(markers[i].getAttribute("lng")));
+              var marker = createMarker(point, name, address, type);
+              map.addOverlay(marker);
+            }
+          });
+          
         }
+      }
+      
+      function createMarker(point, name, address, type) {
+        var marker = new GMarker(point);
+        var html = "<b>" + name + "</b> <br/>" + address;
+        GEvent.addListener(marker, 'click', function() {
+          marker.openInfoWindowHtml(html);
+        });
+        return marker;
       }
 
       //]]>
