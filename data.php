@@ -75,8 +75,8 @@ while ($row = @mysql_fetch_assoc($result)){
     // store the lat/long in db for later use
     $row['geocoding_response_code'] = $geocoded[0];
     $row['geocoding_accuracy'] = $geocoded[1];
-    $row['longitude'] = $geocoded[2];
-    $row['latitude']  = $geocoded[3];
+    $row['latitude'] = $geocoded[2];
+    $row['longitude']  = $geocoded[3];
     
     $query = <<<SQL
       UPDATE locations 

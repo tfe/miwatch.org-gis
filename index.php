@@ -19,7 +19,7 @@
           var map = new GMap2(document.getElementById("map"));
           
           // set map center (required)
-          map.setCenter(new GLatLng(40.71256,-74.00505), 10);
+          map.setCenter(new GLatLng(40.71256,-74.00505), 12);
           
           // add standard map controls
           map.addControl(new GLargeMapControl());
