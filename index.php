@@ -59,6 +59,9 @@
                                     parseFloat(markers[i].getAttribute("lng")));
             var marker = createMarker(point, name, address, type);
             map.addOverlay(marker);
+
+            var sidebar = createSidebarEntry(marker, name, address);
+            $("#sidebar").append(sidebar);
           }
           // done adding markers, stop spinner
           $("#spinner").hide();
@@ -68,11 +71,29 @@
       // function to create custom google maps markers and info boxes
       function createMarker(point, name, address, type) {
         var marker = new google.maps.Marker(point);
-        var html = "<b>" + name + "</b> <br/>" + address;
+        var html = "<h4>" + name + "</h4>" + address;
         google.maps.Event.addListener(marker, 'click', function() {
           marker.openInfoWindowHtml(html);
         });
         return marker;
+      }
+      
+      // function to create entries in the sidebar location listing
+      function createSidebarEntry(marker, name, address) {
+        var div = document.createElement('div');
+        div.className = 'location';
+        var html = '<h4>' + name + '</h4>' + address;
+        div.innerHTML = html;
+        google.maps.Event.addDomListener(div, 'click', function() {
+          google.maps.Event.trigger(marker, 'click');
+        });
+        google.maps.Event.addDomListener(div, 'mouseover', function() {
+          div.style.backgroundColor = '#eee';
+        });
+        google.maps.Event.addDomListener(div, 'mouseout', function() {
+          div.style.backgroundColor = '#fff';
+        });
+        return div;
       }
       
       google.setOnLoadCallback(load);
@@ -81,7 +102,7 @@
     </script>
   </head>
 
-  <body>    
+  <body onunload="google.maps.Unload()">    
     <div id="doc2" class="yui-t2">
 
       <div id="hd">
@@ -91,19 +112,16 @@
       <div id="bd"> 
         <div id="yui-main"> 
           <div class="yui-b"><div class="yui-g"> 
-            <div id="spinner" style="display: none;">
-              <img src="/img/spinner.gif" alt="Loading" /> Loading...
-            </div>
 
             <div id="map" style="width: 755px; height: 500px"></div>
           </div></div>
         </div>
-        <div class="yui-b">
-          <div id="sidebar">
-            <p>Sidebar stuff...</p>
-          
-            <p>This sidebar will never grow longer than the map to the right.</p>
+        <div class="yui-b">          
+          <div id="spinner" style="display: none;">
+            <img src="/img/spinner.gif" alt="Loading" /> Loading&hellip;
           </div>
+          
+          <div id="sidebar"></div>
         </div> 
       </div>
 

@@ -26,7 +26,7 @@ if (!$db_selected) {
 }
 
 // Select all the rows in the markers table
-$query = "SELECT * FROM $dbtable";
+$query = "SELECT * FROM $dbtable ORDER BY name_1";
 $result = mysql_query($query);
 if (!$result) {
   die('Invalid query: ' . mysql_error());

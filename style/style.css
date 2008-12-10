@@ -1,15 +1,18 @@
 #spinner {
-   position: absolute;
-   top: 0;
-   right: 0;
-   color: gray;
-   background: #FFFE9B;
-   padding: .5em 1em;
+  color: gray;
+  background: #FFFE9B;
+  padding: .5em 1em;
 }
 
 #sidebar {
   overflow: auto; 
   height: 500px;
+}
+
+#sidebar .location {
+  cursor: pointer;
+  padding: .1em;
+  margin-bottom: .3em;
 }
 
 #ft {
