@@ -20,6 +20,10 @@
   margin-bottom: .3em;
 }
 
+.location p {
+  margin: .2em 0;
+}
+
 #ft {
   text-align: center;
   font-size: 90%;

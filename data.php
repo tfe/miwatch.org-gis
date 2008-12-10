@@ -37,15 +37,13 @@ header("Content-type: text/xml");
 // Iterate through the rows, adding XML nodes for each
 while ($row = @mysql_fetch_assoc($result)){
   
-  // concatenate address string
+  // concatenate address strings (separate line 1 and 2 for display and full for geocoding)
+  $address_1 = (!empty($row['address_2'])) ? $row['address_1'].', '.$row['address_2'] : $row['address_1'];
+  $address_2 = $row['city'] . ', ' . $row['state'] . ' ' . $row['zip'];
   $address = implode(', ', array($row['address_1'], $row['city'], $row['state'], $row['zip']));
   
   // concatenate names, if name_2 exists
-  if (!empty($row['name_2'])) {
-    $name = implode(': ', array($row['name_1'], $row['name_2']));
-  } else {
-    $name = $row['name_1'];
-  }
+  $name = (!empty($row['name_2'])) ? $row['name_1'].': '.$row['name_2'] : $row['name_1'];
   
   // if location is missing either latitude or longitude info, geocode it
   // using the Google Maps geocoder (returns CSV), and store in the database for future use
@@ -115,7 +113,11 @@ SQL;
   $node = $dom->createElement("marker");  
   $newnode = $parnode->appendChild($node);   
   $newnode->setAttribute("name", $name);
-  $newnode->setAttribute("address", $address);  
+  $newnode->setAttribute("address", $address);
+  $newnode->setAttribute("address_1", $address_1);
+  $newnode->setAttribute("address_2", $address_2);
+  $newnode->setAttribute("phone", $row['phone']);
+  $newnode->setAttribute("website", $row['website']);
   $newnode->setAttribute("lat", $row['latitude']);  
   $newnode->setAttribute("lng", $row['longitude']);  
   $newnode->setAttribute("type", $row['category_1']);

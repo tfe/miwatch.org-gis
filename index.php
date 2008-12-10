@@ -54,16 +54,14 @@
           var xml = google.maps.Xml.parse(data);
           var markers = xml.documentElement.getElementsByTagName("marker");
           for (var i = 0; i < markers.length; i++) {
-            var name = markers[i].getAttribute("name");
-            var address = markers[i].getAttribute("address");
-            var type = markers[i].getAttribute("type");
+            var marker_data = markers[i];
             var point = new google.maps.LatLng(parseFloat(markers[i].getAttribute("lat")),
                                                parseFloat(markers[i].getAttribute("lng")));
             
-            var marker = createMarker(point, name, address, type);
+            var marker = createMarker(point, marker_data);
             map.addOverlay(marker);
 
-            var sidebar = createSidebarEntry(marker, name, address);
+            var sidebar = createSidebarEntry(marker, marker_data);
             $("#sidebar").append(sidebar);
           }
           // done adding markers, stop spinner
@@ -72,9 +70,15 @@
       }
       
       // function to create custom google maps markers and info boxes
-      function createMarker(point, name, address, type) {
+      function createMarker(point, data) {
         var marker = new google.maps.Marker(point);
-        var html = createShortDescription(name, address, '', '');
+        var html = createShortDescription(
+          data.getAttribute("name"), 
+          data.getAttribute("address_1"),
+          data.getAttribute("address_2"),
+          data.getAttribute("phone"),
+          data.getAttribute("website")
+        );
         google.maps.Event.addListener(marker, 'click', function() {
           marker.openInfoWindowHtml(html);
         });
@@ -82,10 +86,16 @@
       }
       
       // function to create entries in the sidebar location listing
-      function createSidebarEntry(marker, name, address) {
+      function createSidebarEntry(marker, data) {
         var div = document.createElement('div');
         div.className = 'location';
-        div.innerHTML = createShortDescription(name, address, '', '');
+        div.innerHTML = createShortDescription(
+          data.getAttribute("name"), 
+          data.getAttribute("address_1"),
+          data.getAttribute("address_2"),
+          data.getAttribute("phone"),
+          data.getAttribute("website")
+        );
         google.maps.Event.addDomListener(div, 'click', function() {
           google.maps.Event.trigger(marker, 'click');
         });
@@ -99,8 +109,12 @@
       }
       
       // function to create a short description of a location (for both marker small infoboxes and sidebar entries)
-      function createShortDescription (name, address, phone, website) {
-        return '<h4>' + name + '</h4>' + address;
+      function createShortDescription (name, address_1, address_2, phone, website) {
+        var html = '';
+        html += '<h4>' + name + '</h4>'
+        html += '<p>' + address_1 + '<br />' + address_2 + '</p>';
+        html += '<p>' + phone + '<br />' + '<a href="http://' + website + '">' + website + '</a>' + '</p>';
+        return html;
       }
       
       // function to create longer description of location for large marker infobox
