@@ -3,14 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title>MISM GIS Project - MIWatch.org</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta name="title" content="MISM GIS Project - MIWatch.org" />
     <meta name="author" content="MISM GIS Project Team: Todd Eichel, Ryan Keane, Zhizhou Liu, Kevin Purtell" />
     
     <!-- Google AJAX Libraries API -->
-    <script  type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $api_key; ?>"></script>  
-    <script> //<![CDATA[
+    <script type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $api_key; ?>"></script>  
+    <script type="text/javascript"> //<![CDATA[
     
       // load jQuery
       google.load("jquery", "1.2.6");
@@ -78,7 +78,7 @@
     <h1>MISM GIS Project - MIWatch.org</h1>
 
     <div id="spinner" style="display: none; position: absolute; top: 0; right: 0; color: black; background: #FFFE9B; padding: 0 1em;">
-      <p><img src="/img/spinner.gif"> Loading...</p>
+      <p><img src="/img/spinner.gif" alt="Loading" /> Loading...</p>
     </div>
     
     <div id="map" style="width: 800px; height: 500px"></div>
