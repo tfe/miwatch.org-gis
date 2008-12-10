@@ -8,57 +8,70 @@
     <meta name="title" content="MISM GIS Project - MIWatch.org" />
     <meta name="author" content="MISM GIS Project Team: Todd Eichel, Ryan Keane, Zhizhou Liu, Kevin Purtell" />
     
-    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?php echo $api_key; ?>" type="text/javascript"></script>
+    <!-- Google AJAX Libraries API -->
+    <script  type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $api_key; ?>"></script>
+    <script> //<![CDATA[
     
-    <script type="text/javascript">
+      // load jQuery
+      google.load("jquery", "1.2.6");
+      // load Maps
+      google.load("maps", "2");
 
-      //<![CDATA[
-
+      // this function gets called when the page has been loaded
       function load() {
-        if (GBrowserIsCompatible()) {
-          var map = new GMap2(document.getElementById("map"));
-          
-          // set map center (required)
-          map.setCenter(new GLatLng(40.71256,-74.00505), 12);
-          
-          // add standard map controls
-          map.addControl(new GLargeMapControl());
-          map.addControl(new GMapTypeControl());
-          map.addControl(new GScaleControl());
-          map.addControl(new GOverviewMapControl());
-          
-          // pull data from php/mysql
-          GDownloadUrl("data.php", function(data) {
-            var xml = GXml.parse(data);
-            var markers = xml.documentElement.getElementsByTagName("marker");
-            for (var i = 0; i < markers.length; i++) {
-              var name = markers[i].getAttribute("name");
-              var address = markers[i].getAttribute("address");
-              var type = markers[i].getAttribute("type");
-              var point = new GLatLng(parseFloat(markers[i].getAttribute("lat")),
-                                      parseFloat(markers[i].getAttribute("lng")));
-              var marker = createMarker(point, name, address, type);
-              map.addOverlay(marker);
-            }
-          });
-          
+        
+        if (google.maps.BrowserIsCompatible()) {
+          loadMap();
         }
+        
       }
       
+      // function to initialize the map, pull data, and add the markers
+      function loadMap () {
+        var map = new google.maps.Map2(document.getElementById("map"));
+        
+        // set map center (required)
+        map.setCenter(new google.maps.LatLng(40.71256,-74.00505), 12);
+        
+        // add standard map controls
+        map.addControl(new google.maps.LargeMapControl());
+        map.addControl(new google.maps.MapTypeControl());
+        map.addControl(new google.maps.ScaleControl());
+        map.addControl(new google.maps.OverviewMapControl());
+        
+        // pull data from php/mysql
+        google.maps.DownloadUrl("data.php", function(data) {
+          var xml = google.maps.Xml.parse(data);
+          var markers = xml.documentElement.getElementsByTagName("marker");
+          for (var i = 0; i < markers.length; i++) {
+            var name = markers[i].getAttribute("name");
+            var address = markers[i].getAttribute("address");
+            var type = markers[i].getAttribute("type");
+            var point = new google.maps.LatLng(parseFloat(markers[i].getAttribute("lat")),
+                                    parseFloat(markers[i].getAttribute("lng")));
+            var marker = createMarker(point, name, address, type);
+            map.addOverlay(marker);
+          }
+        });
+      }
+      
+      // function to create custom google maps markers and info boxes
       function createMarker(point, name, address, type) {
-        var marker = new GMarker(point);
+        var marker = new google.maps.Marker(point);
         var html = "<b>" + name + "</b> <br/>" + address;
-        GEvent.addListener(marker, 'click', function() {
+        google.maps.Event.addListener(marker, 'click', function() {
           marker.openInfoWindowHtml(html);
         });
         return marker;
       }
-
+      
+      google.setOnLoadCallback(load);
+      
       //]]>
     </script>
   </head>
 
-  <body onload="load()" onunload="GUnload()">
+  <body>
     <h1>MISM GIS Project - MIWatch.org</h1>
     
     <div id="map" style="width: 800px; height: 500px"></div>
