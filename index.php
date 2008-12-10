@@ -27,27 +27,29 @@
       // this function gets called when the page has been loaded
       function load() {
         
+        // initialize map
         if (google.maps.BrowserIsCompatible()) {
-          loadMap();
+          var map = new google.maps.Map2(document.getElementById("map"));
+
+          // set map center (required)
+          map.setCenter(new google.maps.LatLng(40.76,-73.95), 12);
+
+          // add standard map controls
+          map.addControl(new google.maps.LargeMapControl());
+          map.addControl(new google.maps.MapTypeControl());
+          map.addControl(new google.maps.ScaleControl());
+          map.addControl(new google.maps.OverviewMapControl());
+          
+          populateMap();
         }
         
       }
       
-      // function to initialize the map, pull data, and add the markers
-      function loadMap () {
-        var map = new google.maps.Map2(document.getElementById("map"));
-        
-        // set map center (required)
-        map.setCenter(new google.maps.LatLng(40.76,-73.95), 12);
-        
-        // add standard map controls
-        map.addControl(new google.maps.LargeMapControl());
-        map.addControl(new google.maps.MapTypeControl());
-        map.addControl(new google.maps.ScaleControl());
-        map.addControl(new google.maps.OverviewMapControl());
-        
-        // start spinner and pull data from php/mysql
+      // function to pull data from PHP/MySQL and add markers to the map
+      function populateMap () {
+        // start spinner
         $("#spinner").show();
+        // pull xml from php/mysql
         google.maps.DownloadUrl("data.php", function(data) {
           var xml = google.maps.Xml.parse(data);
           var markers = xml.documentElement.getElementsByTagName("marker");
@@ -56,7 +58,8 @@
             var address = markers[i].getAttribute("address");
             var type = markers[i].getAttribute("type");
             var point = new google.maps.LatLng(parseFloat(markers[i].getAttribute("lat")),
-                                    parseFloat(markers[i].getAttribute("lng")));
+                                               parseFloat(markers[i].getAttribute("lng")));
+            
             var marker = createMarker(point, name, address, type);
             map.addOverlay(marker);
 
