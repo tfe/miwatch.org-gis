@@ -7,6 +7,11 @@
    padding: .5em 1em;
 }
 
+#sidebar {
+  overflow: auto; 
+  height: 500px;
+}
+
 #ft {
   text-align: center;
   font-size: 90%;

@@ -98,11 +98,12 @@
             <div id="map" style="width: 755px; height: 500px"></div>
           </div></div>
         </div>
-        <div class="yui-b" style="overflow: auto; height: 500px">
-          <p>Sidebar stuff...</p>
+        <div class="yui-b">
+          <div id="sidebar">
+            <p>Sidebar stuff...</p>
           
-          <p>This sidebar will never grow longer than the map to the right.</p>
-          
+            <p>This sidebar will never grow longer than the map to the right.</p>
+          </div>
         </div> 
       </div>
 
