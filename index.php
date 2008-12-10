@@ -9,7 +9,7 @@
     <meta name="author" content="MISM GIS Project Team: Todd Eichel, Ryan Keane, Zhizhou Liu, Kevin Purtell" />
     
     <!-- Google AJAX Libraries API -->
-    <script  type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $api_key; ?>"></script>
+    <script  type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $api_key; ?>"></script>  
     <script> //<![CDATA[
     
       // load jQuery
@@ -39,7 +39,8 @@
         map.addControl(new google.maps.ScaleControl());
         map.addControl(new google.maps.OverviewMapControl());
         
-        // pull data from php/mysql
+        // start spinner and pull data from php/mysql
+        $("#spinner").show();
         google.maps.DownloadUrl("data.php", function(data) {
           var xml = google.maps.Xml.parse(data);
           var markers = xml.documentElement.getElementsByTagName("marker");
@@ -52,6 +53,8 @@
             var marker = createMarker(point, name, address, type);
             map.addOverlay(marker);
           }
+          // done adding markers, stop spinner
+          $("#spinner").hide();
         });
       }
       
@@ -73,6 +76,10 @@
 
   <body>
     <h1>MISM GIS Project - MIWatch.org</h1>
+
+    <div id="spinner" style="display: none; position: absolute; top: 0; right: 0; color: black; background: #FFFE9B; padding: 0 1em;">
+      <p><img src="/img/spinner.gif"> Loading...</p>
+    </div>
     
     <div id="map" style="width: 800px; height: 500px"></div>
     
