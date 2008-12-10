@@ -38,7 +38,7 @@
         var map = new google.maps.Map2(document.getElementById("map"));
         
         // set map center (required)
-        map.setCenter(new google.maps.LatLng(40.71256,-74.00505), 12);
+        map.setCenter(new google.maps.LatLng(40.76,-73.95), 12);
         
         // add standard map controls
         map.addControl(new google.maps.LargeMapControl());
@@ -88,7 +88,7 @@
       <img src="/img/spinner.gif" alt="Loading" /> Loading...
     </div>
     
-    <div id="map" style="width: 800px; height: 500px"></div>
+    <div id="map" style="width: 950px; height: 500px"></div>
     
     <div id="footer">
       <p>
