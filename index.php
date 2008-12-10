@@ -74,7 +74,7 @@
       // function to create custom google maps markers and info boxes
       function createMarker(point, name, address, type) {
         var marker = new google.maps.Marker(point);
-        var html = "<h4>" + name + "</h4>" + address;
+        var html = createShortDescription(name, address, '', '');
         google.maps.Event.addListener(marker, 'click', function() {
           marker.openInfoWindowHtml(html);
         });
@@ -85,8 +85,7 @@
       function createSidebarEntry(marker, name, address) {
         var div = document.createElement('div');
         div.className = 'location';
-        var html = '<h4>' + name + '</h4>' + address;
-        div.innerHTML = html;
+        div.innerHTML = createShortDescription(name, address, '', '');
         google.maps.Event.addDomListener(div, 'click', function() {
           google.maps.Event.trigger(marker, 'click');
         });
@@ -97,6 +96,16 @@
           div.style.backgroundColor = '#fff';
         });
         return div;
+      }
+      
+      // function to create a short description of a location (for both marker small infoboxes and sidebar entries)
+      function createShortDescription (name, address, phone, website) {
+        return '<h4>' + name + '</h4>' + address;
+      }
+      
+      // function to create longer description of location for large marker infobox
+      function createLongDescription (name, address, phone, website, details) {
+        return '';
       }
       
       google.setOnLoadCallback(load);
