@@ -1,0 +1,17 @@
+body {
+  margin: 1em;
+}
+
+#spinner {
+   position: absolute;
+   top: 0;
+   right: 0;
+   color: gray;
+   background: #FFFE9B;
+   padding: .5em 1em;
+}
+
+#footer {
+  font-size: 85%;
+  margin-top: 2em;
+}

@@ -8,6 +8,13 @@
     <meta name="title" content="MISM GIS Project - MIWatch.org" />
     <meta name="author" content="MISM GIS Project Team: Todd Eichel, Ryan Keane, Zhizhou Liu, Kevin Purtell" />
     
+    <!-- Individual YUI CSS files --> 
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/yui/2.6.0/build/reset-fonts/reset-fonts.css" />
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/yui/2.6.0/build/base/base-min.css" />
+    
+    <!-- Our CSS file -->
+    <link rel="stylesheet" href="style/style.css" type="text/css" />
+    
     <!-- Google AJAX Libraries API -->
     <script type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $api_key; ?>"></script>  
     <script type="text/javascript"> //<![CDATA[
@@ -77,14 +84,20 @@
   <body>
     <h1>MISM GIS Project - MIWatch.org</h1>
 
-    <div id="spinner" style="display: none; position: absolute; top: 0; right: 0; color: black; background: #FFFE9B; padding: 0 1em;">
-      <p><img src="/img/spinner.gif" alt="Loading" /> Loading...</p>
+    <div id="spinner" style="display: none;">
+      <img src="/img/spinner.gif" alt="Loading" /> Loading...
     </div>
     
     <div id="map" style="width: 800px; height: 500px"></div>
     
     <div id="footer">
-      <p>&copy; 2008 MIWatch.org</p>
+      <p>
+        &copy; Copyright 2008 <a href="http://www.miwatch.org/">MIWatch.org</a> |
+        All work performed by <a href="http://ism.cmu.edu/">Carnegie Mellon University MISM</a> students |
+        Maps by <a href="http://code.google.com/apis/maps/">Google</a> | 
+        YUI CSS by <a href="http://developer.yahoo.com/yui/">Yahoo! User Interface Library</a> |
+        jQuery JavaScript by <a href="http://jquery.com">jQuery</a>
+      </p>
     </div>
   </body>
 </html>
