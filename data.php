@@ -49,7 +49,8 @@ while ($row = @mysql_fetch_assoc($result)){
   
   // if location is missing either latitude or longitude info, geocode it
   // using the Google Maps geocoder (returns CSV), and store in the database for future use
-  if (empty($row['latitude']) || empty($row['longitude'])) {
+  if ((empty($row['latitude']) || empty($row['longitude'])) ||
+      ($row['latitude'] == 0   || $row['longitude'] == 0 )) {
     
     $url = "http://maps.google.com/maps/geo?q=".urlencode($address)."&output=csv&sensor=false&key=".$api_key;
     
@@ -60,9 +61,10 @@ while ($row = @mysql_fetch_assoc($result)){
 
     // deal with HTTP response (decode response or throw error)
     $response_code = $req->getResponseCode();
+    $response_body = $req->getResponseBody();
     switch ($response_code) {
       case 200:
-        $geocoded = explode(',', $req->getResponseBody());
+        $geocoded = explode(',', $response_body);
         break;
       // other handleable cases should be dealt with here
       default:
@@ -79,10 +81,11 @@ while ($row = @mysql_fetch_assoc($result)){
     $query = <<<SQL
       UPDATE locations 
       SET 
-        latitude={$row['latitude']}, 
-        longitude={$row['longitude']}, 
-        geocoding_accuracy={$row['geocoding_response_code']},
-        geocoding_response_code={$row['geocoding_accuracy']}
+        latitude="{$row['latitude']}", 
+        longitude="{$row['longitude']}", 
+        geocoding_accuracy="{$row['geocoding_accuracy']}",
+        geocoding_response_code="{$row['geocoding_response_code']}",
+        geocoding_response_body="$response_body"
       WHERE id={$row['id']}
       LIMIT 1
 SQL;
