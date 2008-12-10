@@ -40,13 +40,13 @@
           map.addControl(new google.maps.ScaleControl());
           map.addControl(new google.maps.OverviewMapControl());
           
-          populateMap();
+          populateMap(map);
         }
         
       }
       
       // function to pull data from PHP/MySQL and add markers to the map
-      function populateMap () {
+      function populateMap (map) {
         // start spinner
         $("#spinner").show();
         // pull xml from php/mysql
@@ -115,16 +115,17 @@
       <div id="bd"> 
         <div id="yui-main"> 
           <div class="yui-b"><div class="yui-g"> 
-
+            <!-- Google Map will be placed in this DIV. -->
             <div id="map" style="width: 755px; height: 500px"></div>
           </div></div>
         </div>
-        <div class="yui-b">          
-          <div id="spinner" style="display: none;">
-            <img src="/img/spinner.gif" alt="Loading" /> Loading&hellip;
-          </div>
+        <div class="yui-b">
+          <!-- This DIV is kept hidden until we have a need to show the loading message. -->
+          <div id="spinner" style="display: none;">Loading&hellip;</div>
           
-          <div id="sidebar"></div>
+          <div id="sidebar">
+            <!-- As sidebar elements are loaded from the database via AJAX, they are inserted into the HTML here. -->
+          </div>
         </div> 
       </div>
 

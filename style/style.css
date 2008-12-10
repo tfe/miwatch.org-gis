@@ -1,10 +1,15 @@
 #spinner {
   color: gray;
   background: #FFFE9B;
+  background-image: url('/img/spinner.gif');
+  background-repeat: no-repeat;
+  background-position: .5em .5em;
   padding: .5em 1em;
+  padding-left: 2em;
 }
 
 #sidebar {
+  /* these are what keeps the sidebar at constant height to match the map, rather than lengthening the page */
   overflow: auto; 
   height: 500px;
 }
