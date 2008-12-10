@@ -9,7 +9,7 @@
     <meta name="author" content="MISM GIS Project Team: Todd Eichel, Ryan Keane, Zhizhou Liu, Kevin Purtell" />
     
     <!-- Individual YUI CSS files --> 
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/yui/2.6.0/build/reset-fonts/reset-fonts.css" />
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" /> 
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/yui/2.6.0/build/base/base-min.css" />
     
     <!-- Our CSS file -->
@@ -81,23 +81,40 @@
     </script>
   </head>
 
-  <body>
-    <h1>MISM GIS Project - MIWatch.org</h1>
+  <body>    
+    <div id="doc2" class="yui-t2">
 
-    <div id="spinner" style="display: none;">
-      <img src="/img/spinner.gif" alt="Loading" /> Loading...
-    </div>
-    
-    <div id="map" style="width: 950px; height: 500px"></div>
-    
-    <div id="footer">
-      <p>
-        &copy; Copyright 2008 <a href="http://www.miwatch.org/">MIWatch.org</a> |
-        All work performed by <a href="http://ism.cmu.edu/">Carnegie Mellon University MISM</a> students |
-        Maps by <a href="http://code.google.com/apis/maps/">Google</a> | 
-        YUI CSS by <a href="http://developer.yahoo.com/yui/">Yahoo! User Interface Library</a> |
-        jQuery JavaScript by <a href="http://jquery.com">jQuery</a>
-      </p>
+      <div id="hd">
+        <h1>MISM GIS Project - MIWatch.org</h1>
+      </div>
+
+      <div id="bd"> 
+        <div id="yui-main"> 
+          <div class="yui-b"><div class="yui-g"> 
+            <div id="spinner" style="display: none;">
+              <img src="/img/spinner.gif" alt="Loading" /> Loading...
+            </div>
+
+            <div id="map" style="width: 755px; height: 500px"></div>
+          </div></div>
+        </div>
+        <div class="yui-b" style="overflow: auto; height: 500px">
+          <p>Sidebar stuff...</p>
+          
+          <p>This sidebar will never grow longer than the map to the right.</p>
+          
+        </div> 
+      </div>
+
+      <div id="ft">
+        <p>
+          &copy; 2008 <a href="http://www.miwatch.org/">MIWatch.org</a> |
+          All work performed by <a href="http://ism.cmu.edu/">Carnegie Mellon University MISM</a> students |
+          Maps by <a href="http://code.google.com/apis/maps/">Google</a> | 
+          YUI CSS by <a href="http://developer.yahoo.com/yui/">Yahoo! User Interface Library</a> |
+          jQuery JavaScript by <a href="http://jquery.com">jQuery</a>
+        </p>
+      </div>
     </div>
   </body>
 </html>
