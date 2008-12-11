@@ -1,12 +1,22 @@
-#spinner {
-  color: gray;
-  background: #FFFE9B;
-  background-image: url('/img/spinner.gif');
-  background-repeat: no-repeat;
-  background-position: .5em .5em;
-  padding: .5em 1em;
-  padding-left: 2em;
+#filters {
+  float: right;
+  margin: 1.5em;
 }
+
+#filters h4, #filters p {
+  display: inline;
+  margin: 0 .5em;
+}
+
+
+#logo {
+  float: left;
+}
+
+#hd {
+  height: 4em;
+}
+
 
 #sidebar {
   /* these are what keeps the sidebar at constant height to match the map, rather than lengthening the page */
@@ -28,4 +38,14 @@
   text-align: center;
   font-size: 90%;
   margin-top: 2em;
+}
+
+#spinner {
+  color: gray;
+  background: #FFFE9B;
+  background-image: url('/img/spinner.gif');
+  background-repeat: no-repeat;
+  background-position: .5em .5em;
+  padding: .5em 1em;
+  padding-left: 2em;
 }

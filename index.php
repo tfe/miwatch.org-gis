@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/yui/2.6.0/build/base/base-min.css" />
     
     <!-- Our CSS file -->
-    <link rel="stylesheet" href="style/style.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
     
     <!-- Google AJAX Libraries API -->
     <script type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $api_key; ?>"></script>  
@@ -132,7 +132,22 @@
     <div id="doc2" class="yui-t2">
 
       <div id="hd">
-        <h1>MISM GIS Project - MIWatch.org</h1>
+        <div id="logo">
+          <h1>MISM GIS Project - MIWatch.org</h1>          
+        </div>
+        
+        <!-- In the future, this categories list should be generated dynamically from the database, but static is fine for now. -->
+        <div id="filters">
+          <h4>Show categories:</h4>
+          <p>
+            <input type="checkbox" name="filter" value="mental_health" id="mental_health" checked="checked" />
+            <label for="mental_health">Mental Health</label>
+          </p>
+          <p>            
+            <input type="checkbox" name="filter" value="substance_abuse" id="substance_abuse" />
+            <label for="substance_abuse">Substance Abuse</label>
+          </p>
+        </div>
       </div>
 
       <div id="bd"> 
