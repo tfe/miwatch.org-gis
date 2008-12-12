@@ -87,15 +87,24 @@
       // function to create custom google maps markers and info boxes
       function createMarker(point, data) {
         var marker = new google.maps.Marker(point);
-        var html = createShortDescription(
+        var div = document.createElement('div');
+        // handle long descriptions which would otherwise overflow
+        if (data.getAttribute("description").length > 100) {
+          div.className = 'infobox long';          
+        } else {          
+          div.className = 'infobox';
+        }
+        div.innerHTML = createLongDescription(
           data.getAttribute("name"), 
           data.getAttribute("address_1"),
           data.getAttribute("address_2"),
           data.getAttribute("phone"),
-          data.getAttribute("website")
+          data.getAttribute("website"),
+          data.getAttribute("type_detail"),
+          data.getAttribute("description")
         );
         google.maps.Event.addListener(marker, 'click', function() {
-          marker.openInfoWindowHtml(html);
+          marker.openInfoWindow(div);
         });
         return marker;
       }
@@ -133,8 +142,11 @@
       }
       
       // function to create longer description of location for large marker infobox
-      function createLongDescription (name, address, phone, website, details) {
-        return '';
+      function createLongDescription (name, address_1, address_2, phone, website, type_detail, description) {
+        var html = createShortDescription(name, address_1, address_2, phone, website);
+        html += '<p>' + type_detail + '</p>';
+        html += '<p>' + description + '</p>';
+        return html;
       }
       
       google.setOnLoadCallback(load);

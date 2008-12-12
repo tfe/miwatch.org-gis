@@ -129,6 +129,8 @@ SQL;
   $newnode->setAttribute("lat", $row['latitude']);  
   $newnode->setAttribute("lng", $row['longitude']);  
   $newnode->setAttribute("type", $row['category_1']);
+  $newnode->setAttribute("type_detail", $row['category_2']);
+  $newnode->setAttribute("description", utf8_encode($row['description']));
 }
 
 echo $dom->saveXML();

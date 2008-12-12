@@ -30,6 +30,12 @@
   margin-bottom: .3em;
 }
 
+
+.infobox.long {
+  overflow: auto;
+  max-height: 200px;
+}
+
 .location p {
   margin: .2em 0;
 }
