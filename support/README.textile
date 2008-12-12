@@ -83,7 +83,9 @@ h3. Downloading SAMHSA Mental Health Information
 # In *servicesData.xls*, *category_2* should be the data for *Service Setting* from the website
 
 h3. Database Import
-Information goes here.
+# Save *servicesData.xls* as a CSV file
+# To do so, use some combination of File > Save As > CSV Format (you might need to select "Other Formats")
+# Import the CSV data into MySQL using PHPMyAdmin, or a comparable utility.
 
 
 h2. Architecture and Data Flow
