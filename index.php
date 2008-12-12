@@ -39,18 +39,33 @@
           map.addControl(new google.maps.MapTypeControl());
           map.addControl(new google.maps.ScaleControl());
           map.addControl(new google.maps.OverviewMapControl());
-          
-          populateMap(map);
         }
+
+        // attach events to filter parameters
+        $("#filters input").change(function() {
+          // compose params, a string of GET variables to pass to the data-generating PHP
+          params = '?';
+          $("#filters input").each(function(){
+            if ($(this).attr('checked')) {
+              params += '&filter['+ $(this).val() +']=true';
+            }
+          });
+          populateMap(map, params);
+        });
         
+        // trigger one change to get initial population
+        $("#filters input:first").change();
       }
       
       // function to pull data from PHP/MySQL and add markers to the map
-      function populateMap (map) {
+      function populateMap (map, params) {
         // start spinner
         $("#spinner").show();
+        // clear the map and sidebar
+        map.clearOverlays();
+        $("#sidebar").empty();
         // pull xml from php/mysql
-        google.maps.DownloadUrl("data.php", function(data) {
+        google.maps.DownloadUrl("data.php" + params, function(data) {
           var xml = google.maps.Xml.parse(data);
           var markers = xml.documentElement.getElementsByTagName("marker");
           for (var i = 0; i < markers.length; i++) {
@@ -136,9 +151,10 @@
           <h1>MISM GIS Project - MIWatch.org</h1>          
         </div>
         
-        <!-- In the future, this categories list should be generated dynamically from the database, but static is fine for now. -->
+        <!-- In the future, this categories list should be generated dynamically from the database column 'category_1', but static is fine for now. -->
         <div id="filters">
           <h4>Show categories:</h4>
+          <!-- Every INPUT field in this DIV will have its ID passed to data.php if it is checked. -->
           <p>
             <input type="checkbox" name="filter" value="mental_health" id="mental_health" checked="checked" />
             <label for="mental_health">Mental Health</label>

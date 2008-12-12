@@ -2,7 +2,7 @@
 /**
  * Site-wide Initialization Stuff
  * 
- * Contains site-wide initialization procedures for MIWatch.org GIS.
+ * Contains site-wide initialization procedures and helper functions for MIWatch.org GIS.
  * 
  * Author: Todd Eichel (todd@toddeichel.com), 1 December 2008
  */
@@ -27,8 +27,31 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 // easy way to debug variables
 function debug($var) {
   echo "<pre>";
-  print_r($var);
+  if (is_array($var)) {
+    print_r($var);
+  } else {
+    var_dump($var);    
+  }
   echo "</pre>";
 }
+
+// http://www.sitepoint.com/blogs/2005/03/15/title-case-in-php/
+// Converts $title to Title Case, and returns the result.
+function strtotitle($title) {
+  $title = strtolower(str_replace('_', ' ', $title));
+  // Our array of 'small words' which shouldn't be capitalised if
+  // they aren't the first word. Add your own words to taste.
+  $smallwordsarray = array( 'of','a','the','and','an','or','nor','but','is','if','then','else','when', 'at','from','by','on','off','for','in','out','over','to','into','with' );
+  // Split the string into separate words
+  $words = explode(' ', $title);
+  foreach ($words as $key => $word) {
+    // If this word is the first, or it's not one of our small words, capitalise it
+    // with ucwords().
+    if ($key == 0 or !in_array($word, $smallwordsarray)) $words[$key] = ucwords($word);
+  } // Join the words back into a string
+  $newtitle = implode(' ', $words);
+  return $newtitle;
+}
+
 
 ?>

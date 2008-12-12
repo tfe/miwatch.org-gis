@@ -25,8 +25,16 @@ if (!$db_selected) {
   die ('Can\'t use db : ' . mysql_error());
 }
 
-// Select all the rows in the markers table
-$query = "SELECT * FROM $dbtable ORDER BY name_1";
+// build appropriate filter string
+if (isset($_GET['filter'])) {
+  $filter_sql = 'WHERE `category_1` IN ("'.strtotitle(implode('","', array_keys($_GET['filter']))).'")';
+} else {
+  // the filter GET variables should always be set; if they're not, don't return any results
+  $filter_sql = 'WHERE FALSE';
+}
+
+// Select all the rows in the markers table, subject to filter string
+$query = "SELECT * FROM $dbtable $filter_sql ORDER BY name_1";
 $result = mysql_query($query);
 if (!$result) {
   die('Invalid query: ' . mysql_error());
@@ -124,7 +132,6 @@ SQL;
 }
 
 echo $dom->saveXML();
-
 
 
 ?>
