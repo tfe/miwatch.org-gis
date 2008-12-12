@@ -35,8 +35,8 @@ function debug($var) {
   echo "</pre>";
 }
 
-// http://www.sitepoint.com/blogs/2005/03/15/title-case-in-php/
 // Converts $title to Title Case, and returns the result.
+// http://www.sitepoint.com/blogs/2005/03/15/title-case-in-php/
 function strtotitle($title) {
   $title = strtolower(str_replace('_', ' ', $title));
   // Our array of 'small words' which shouldn't be capitalised if
@@ -51,6 +51,27 @@ function strtotitle($title) {
   } // Join the words back into a string
   $newtitle = implode(' ', $words);
   return $newtitle;
+}
+
+// Sanitizes variables for use in SQL queries.
+// http://us3.php.net/manual/en/function.mysql-real-escape-string.php#82110
+function sanitize($var) {
+  if (is_array($var)) {   //run each array item through this function (by reference)        
+    foreach ($var as &$key => &$val) {
+      $key = sanitize($key);
+      $val = sanitize($val);
+    }
+  }
+  else if (is_string($var)) { //clean strings
+    $var = mysql_real_escape_string($var);
+  }
+  else if (is_null($var)) {   //convert null variables to SQL NULL
+    $var = "NULL";
+  }
+  else if (is_bool($var)) {   //convert boolean variables to binary boolean
+    $var = ($var) ? 1 : 0;
+  }
+  return $var;
 }
 
 
