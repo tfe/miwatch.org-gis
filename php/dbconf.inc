@@ -5,11 +5,10 @@
  * Contains site-wide database connection information for MIWatch.org GIS.
  * Pretty self-explanatory.
  * 
- * Author: Todd Eichel (todd@toddeichel.com), 1 December 2008
  */
 
 $dbtype = 'mysql';
-$dbhost = 'mentor.toddeichel.com';
+$dbhost = 'localhost';
 $dbuser = 'mismgis';
 $dbpass = 'miwatch.org';
 $dbname = 'mismgis';

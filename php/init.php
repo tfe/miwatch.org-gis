@@ -4,7 +4,6 @@
  * 
  * Contains site-wide initialization procedures and helper functions for MIWatch.org GIS.
  * 
- * Author: Todd Eichel (todd@toddeichel.com), 1 December 2008
  */
  
 // pull in database configuration
