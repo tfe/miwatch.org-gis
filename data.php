@@ -45,6 +45,10 @@ header("Content-type: text/xml");
 // Iterate through the rows, adding XML nodes for each
 while ($row = @mysql_fetch_assoc($result)){
   
+  // throw out results that we are unable to geocode or that are not precise enough 
+  // (http://code.google.com/apis/maps/documentation/reference.html#GGeoAddressAccuracy)
+  if ($row['geocoding_accuracy'] < 6) continue;
+  
   // concatenate address strings (separate line 1 and 2 for display and full for geocoding)
   $address_1 = (!empty($row['address_2'])) ? $row['address_1'].', '.$row['address_2'] : $row['address_1'];
   $address_2 = $row['city'] . ', ' . $row['state'] . ' ' . $row['zip'];
