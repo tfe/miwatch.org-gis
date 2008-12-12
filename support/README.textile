@@ -47,7 +47,44 @@ It is *highly recommended* to remove this directory before deploying the applica
 
 h2. Database Population
 
-Add information here.
+h3. Downloading ICCD International Clubhouse Directory Data
+# Navigate to "http://www.iccd.org/clubhouseDirectory.aspx":http://www.iccd.org/clubhouseDirectory.aspx
+# Click on “Clubhouses Listed by Cities” on the top right of the list of locations.
+# Find the location within New York that you want to add to the database and manually copy the address information from the website to *servicesData.xls*. 
+# For *category_1* field, enter “Mental Health” and *category_2* enter “Clubhouse”. 
+# Fields clubhouse_certified and clubhouse_training_base in *servicesData.xls* will identify the location as a training center or a certified club house (refer to website for what that means). If the location you want to input is a Yes or No for any of those fields, put a “Y” for yes and a “N” for no.
+
+h3. Downloading Mental Health Association of New York City, Inc. Data
+# Navigate to "http://www.mhaofnyc.org/4mhaProgServ.html":http://www.mhaofnyc.org/4mhaProgServ.html
+# On the left side bar, you will see links for different types of services.
+# For example, if the location you want to add is under Child and Adolescent Services, click on the link. We will pretend the location we wish to add to the database is located in here.
+# On that page, there are many services with locations. Scroll down to the service you wish to add and manually add the address information to the database.
+# Since most of these services also have descriptions. You can also copy and paste the descriptions into the “description” field in *servicesData.xls*. 
+# *Category_1* field in *servicesData.xls* will be “Mental Health”.
+# *Category_2* in *servicesData.xls* will be the section you are under for Step 2: a. In this case, we would enter “Child and Adolescent Services” in *category_2* field. 
+
+h3. Downloading SAMHSA Substance Abuse Information
+# Navigate to "http://findtreatment.samhsa.gov/ufds/locstatecity":http://findtreatment.samhsa.gov/ufds/locstatecity 
+# Choose New York, New York
+# Click "Search Now"
+# Click "Download"
+# Click "Excel Format"
+# If a warning shows, you can ignore it
+# Move relevant information into *servicesData.xls*
+# In *servicesData.xls*, *category_1* should be “Substance Abuse”
+# The column *Service_Text3* should be moved to *category_2* in *servicesData.xls*
+
+h3. Downloading SAMHSA Mental Health Information
+# Make sure to use Internet Explorer
+# Visit "http://mentalhealth.samhsa.gov/databases/facility-search.aspx?state=NY&fullname=New+York":http://mentalhealth.samhsa.gov/databases/facility-search.aspx?state=NY&fullname=New+York 
+# In "Filter Your Results by City" choose "New York" (NOT "New York City") and click Go
+# You will have to manually copy and paste all information into *servicesData.xls*. 
+# In *servicesData.xls*, *category_1* should be “Mental Heath”
+# In *servicesData.xls*, *category_2* should be the data for *Service Setting* from the website
+
+h3. Database Import
+Information goes here.
+
 
 h2. Architecture and Data Flow
 
