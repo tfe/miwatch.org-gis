@@ -27,7 +27,8 @@ if (!$db_selected) {
 
 // build appropriate filter string
 if (isset($_GET['filter'])) {
-  $filter_sql = 'WHERE `category_1` IN ("'.strtotitle(implode('","', array_keys(sanitize($_GET['filter'])))).'")';
+  $filters = sanitize(array_keys($_GET['filter']));
+  $filter_sql = 'WHERE `category_1` IN ("'.strtotitle(implode('","', $filters)).'")';
 } else {
   // the filter GET variables should always be set; if they're not, don't return any results
   $filter_sql = 'WHERE FALSE';

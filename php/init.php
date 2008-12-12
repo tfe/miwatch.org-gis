@@ -57,8 +57,7 @@ function strtotitle($title) {
 // http://us3.php.net/manual/en/function.mysql-real-escape-string.php#82110
 function sanitize($var) {
   if (is_array($var)) {   //run each array item through this function (by reference)        
-    foreach ($var as &$key => &$val) {
-      $key = sanitize($key);
+    foreach ($var as &$val) {
       $val = sanitize($val);
     }
   }
