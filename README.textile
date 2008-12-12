@@ -23,7 +23,7 @@ h3. "YUI":http://yuilibrary.com/ (Yahoo! User Interface Library)
 We took advantage of YUI's design pattern library for the grid layout and basic styles that come with it.
 
 
-h2. Code Structure
+h2. File Structure
 
 The root directory is used as the webroot. The main index page and the data-retrieving PHP file are included in this directory. Within that directory there are couple of other directories:
 
@@ -34,6 +34,15 @@ This folder contains two files: @init.php@ is the first file loaded and contains
 h3. @/style@
 
 This folder contains @style.css@ with our own styles. Other CSS files are loaded directly from YUI.
+
+h3. @/support@
+
+This folder contains:
+* README as both "Textile":http://hobix.com/textile/ and PDF
+* @database-blank.sql@: A *structure only* dump of the application database, without any data.
+* @database-populated.sql@: A full dump of the application database, with data.
+
+It is *highly recommended* to remove this directory before deploying the application on a public web server.
 
 
 h2. Database Population
