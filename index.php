@@ -137,7 +137,7 @@
         var html = '';
         html += '<h4>' + name + '</h4>'
         html += '<p>' + address_1 + '<br />' + address_2 + '</p>';
-        html += '<p>' + phone + '<br />' + '<a href="http://' + website + '">' + Visit Website + '</a>' + '</p>';
+        html += '<p>' + phone + '<br />' + '<a href="http://' + website + '">' + 'Visit Website' + '</a>' + '</p>';
         return html;
       }
       
